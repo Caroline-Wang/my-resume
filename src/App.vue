@@ -1,23 +1,79 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+    <header>
+      <Topbar/>
+    </header>
+
+    <main>
+      <ResumeEdit/>
+    </main>
+
   </div>
 </template>
 
 <script>
-export default {
-  name: 'App'
-}
+
+  //引入css
+  import "./assets/reset.css"
+
+  //引入js
+  import store from "./store/index"
+  import Topbar from "./components/Topbar"
+  import ResumeEdit from "./components/ResumeEdit"
+
+  export default {
+    name: 'App',
+    components:{
+      Topbar,ResumeEdit
+    },
+    store
+  }
+
 </script>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+<style lang="scss">
+
+  #app {
+    width: 100%;
+    height: 100%;
+    display:flex;
+    flex-direction:column;
+    background: #EAEBEC;
+
+    >header {
+       flex-grow: 0;
+       flex-shrink: 0;
+       height: 70px;
+       background: #fff;
+       box-shadow: 1px 1px 3px #ccc;
+
+      #topbar{
+        max-width: 1440px;
+        min-width: 1024px;
+        width:100%;
+        height: 70px;
+        margin:0 auto;
+        padding: 0 20px;
+      }
+     }
+
+    >main{
+       width: 1000px;
+       margin:0 auto;
+       flex-grow: 1;
+       flex-shrink: 1;
+       padding: 20px;
+       display: flex;
+       justify-content: center;
+       /*align-items: center;*/
+
+       >#resumeEdit{
+         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+       }
+
+
+     }
+
+  }
+
 </style>
