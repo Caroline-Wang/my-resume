@@ -8,25 +8,63 @@
         </div>
       </div>
       <div class="base-info">
-        <h2>{{resume.name}}</h2>
-        <p>{{resume.work}}</p>
+        <h2 contenteditable="true">{{resume.name}}</h2>
+        <p contenteditable="true">{{resume.work}}</p>
       </div>
       <div class="base-section" data-name="personalInfo">
         <div class="title-bar">
           <h3>个人资料</h3>
-          <a href="javascript:;">+</a>
-          <!--<a href="javascript:;">x</a>-->
+          <div class="action">
+            <a href="javascript:;">+</a>
+            <a href="javascript:;">x</a>
+          </div>
+          <div class="title-bar-style"></div>
         </div>
-        <ul v-if="typeof resume.personalInfo==='object'">
-          <li v-for="(value,key) in resume.personalInfo">
-            {{key}}:{{value}}
-          </li>
-        </ul>
-
+        <div class="section-show" v-if="typeof resume.personalInfo==='object'">
+          <tr v-for="(value,key) in resume.personalInfo" class="list-item">
+            <td contenteditable="true">{{key}}</td><td contenteditable="true">{{value}}</td>
+            <!--<td><input type="text" :value="key"></td><td><input type="text" :value="value"></td>-->
+          </tr>
+        </div>
       </div>
+
+      <div class="base-section" data-name="education">
+        <div class="title-bar">
+          <h3>教育背景</h3>
+          <div class="action">
+            <a href="javascript:;">+</a>
+            <a href="javascript:;">x</a>
+          </div>
+          <div class="title-bar-style"></div>
+        </div>
+        <div class="section-show" v-if="resume.education instanceof Array">
+          <ul>
+            <li v-for="(value) in resume.education" class="list-item" contenteditable="true">
+              {{value}}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="base-section" data-name="introduction">
+        <div class="title-bar">
+          <h3>自我评价</h3>
+          <div class="action">
+            <a href="javascript:;">+</a>
+            <a href="javascript:;">x</a>
+          </div>
+          <div class="title-bar-style"></div>
+        </div>
+        <div class="section-show" v-if="typeof resume.introduction==='string'">
+          {{resume.introduction}}
+        </div>
+      </div>
+
     </section>
     <section class="main-infos">
-      222
+      <div v-show="">
+
+      </div>
     </section>
   </div>
 
@@ -106,7 +144,7 @@
            }
         }
         .base-section{
-          padding:0 20px 20px 50px;
+          padding:0 20px 40px 50px;
 
           .title-bar{
             height: 32px;
@@ -115,6 +153,7 @@
             align-items: center;
             background:#aaa;
             padding-left:10px;
+            margin-bottom: 10px;
             position:relative;
 
             h3:first-child{
@@ -122,8 +161,44 @@
               font-size: 18px;
             }
 
-            a{
+            .action{
+              height: 100%;
+              display: flex;
+              justify-content: flex-end;
+              align-items: center;
+              position: absolute;
+              top:0;
+              left:calc(100% - 40px);
+              z-index: 1;
 
+              >a{
+                 width: 20px;
+                 height: 20px;
+               }
+            }
+
+            .title-bar-style::before{
+              content: '';
+              display: block;
+              width:40px;
+              height:32px;
+              background: #aaa;
+              position: absolute;
+              top:0;
+              left:100%;
+            }
+            .title-bar-style::after{
+              content: '';
+              display: block;
+              width:0px;
+              height:0px;
+              border-left:10px solid #777;
+              border-top:6px solid #777;
+              border-right:10px solid transparent;
+              border-bottom:6px solid transparent;
+              position: absolute;
+              top:100%;
+              left:calc(100% + 20px);
             }
           }
           .title-bar::before{
@@ -139,32 +214,36 @@
             top:0;
             left: -24px;
           }
-          .title-bar::after{
-            content: '';
-            display: block;
-            width:40px;
-            height:32px;
-            background: red;
-            position: absolute;
-            top:0;
-            left:100%;
+
+
+          .section-show{
+            padding-left: 10px;
+
+            .list-item{
+              /*padding:10px 0 0 0;*/
+            }
           }
-          /*.title-bar::after{*/
-            /*content: '';*/
-            /*display: block;*/
-            /*width:20px;*/
-            /*height:12px;*/
-            /*background: blue;*/
-            /*position: absolute;*/
-            /*top:100%;*/
-            /*left:100%;*/
-          /*}*/
+        }
+
+        div[data-name="personalInfo"]{
+          .list-item{
+            td{
+              padding:8px 20px 0 0;
+            }
+          }
+        }
+        div[data-name="education"]{
+          ul{
+            list-style: circle;
+            padding-left: 20px;
+            line-height: 1.5;
+          }
         }
       }
      >.main-infos{
         width:65%;
         background: #fff;
-        overflow: auto;
+
       }
   }
 
