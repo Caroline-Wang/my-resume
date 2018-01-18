@@ -55,15 +55,35 @@
           </div>
           <div class="title-bar-style"></div>
         </div>
-        <div class="section-show" v-if="typeof resume.introduction==='string'">
+        <div class="section-show" v-if="typeof resume.introduction==='string'" contenteditable="true">
           {{resume.introduction}}
         </div>
       </div>
 
     </section>
     <section class="main-infos">
-      <div v-show="">
-
+      <div class="main-section" data-name="projects" v-if="resume.projects instanceof Array">
+        <div class="title-bar">
+          <div>
+            <img src="../assets/user_3.png" alt="">
+            <h3>项目经历</h3>
+          </div>
+          <div class="action">
+            <a href="javascript:;">+</a>
+            <a href="javascript:;">x</a>
+          </div>
+        </div>
+        <div class="section-show" v-for="project in resume.projects">
+          <div class="list-item">
+            <div class="title">
+              <p>{{project.name}}</p>
+              <p><span>{{project.startTime}}</span> — <span>{{project.endTime}}</span></p>
+            </div>
+            <ul class="content">
+                {{project.content}}
+            </ul>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -218,6 +238,7 @@
 
           .section-show{
             padding-left: 10px;
+            font-size:14px;
 
             .list-item{
               /*padding:10px 0 0 0;*/
@@ -244,6 +265,49 @@
         width:65%;
         background: #fff;
 
+        .main-section{
+          margin:50px 20px 20px 50px;
+
+          .title-bar{
+            padding-left: 6px;
+            padding-bottom: 6px;
+            border-bottom:1px solid #ddd;
+            display:flex;
+            justify-content:space-between;
+            align-items: center;
+
+            img{
+               width:20px;
+               height: 20px;
+               vertical-align: bottom;
+               margin-right: 4px;
+             }
+             h3{
+                display: inline-block;
+                font-weight: 600;
+                font-size: 20px;
+              }
+          }
+          .section-show{
+            padding-left: 10px;
+            margin-bottom:20px;
+
+            .list-item{
+              .title{
+                display: flex;
+                justify-content: space-between;
+                color: #666;
+                font-weight: bold;
+                margin: 10px 0;
+              }
+              .content{
+                font-size: 14px;
+                line-height: 1.5;
+              }
+            }
+          }
+
+        }
       }
   }
 

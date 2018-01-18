@@ -26,18 +26,19 @@ const store=new Vuex.Store({
       ],
       projects:[
         {
-          "name":"项目名称",
-          "role":"我承担的角色",
-          "startTime":"开始时间",
-          "endTime":"结束时间",
-          "description":"项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          "name":"基于xx的web平台",
+          "startTime":"2017-1-1",
+          "endTime":"2018-1-1",
+          "content":[
+            "项目职责：前端开发",
+            "项目描述：项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          ]
         },
         {
-          "name":"项目名称",
-          "role":"我承担的角色",
-          "startTime":"开始时间",
-          "endTime":"结束时间",
-          "description":"项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          "name":"基于xx的web平台",
+          "startTime":"2017-1-1",
+          "endTime":"2018-1-1",
+          "content":"项目职责：前端开发"
         }
       ],
       works:[
