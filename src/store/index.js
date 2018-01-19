@@ -27,6 +27,7 @@ const store=new Vuex.Store({
       projects:[
         {
           "name":"基于xx的web平台",
+          "myRole":"UI设计",
           "startTime":"2017-1-1",
           "endTime":"2018-1-1",
           "content":[
@@ -36,13 +37,84 @@ const store=new Vuex.Store({
         },
         {
           "name":"基于xx的web平台",
+          "myRole":"UI设计",
           "startTime":"2017-1-1",
           "endTime":"2018-1-1",
-          "content":"项目职责：前端开发"
+          "content":[
+            "项目职责：前端开发",
+            "项目描述：项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          ]
+        },
+        {
+          "name":"基于xx的web平台",
+          "myRole":"UI设计",
+          "startTime":"2017-1-1",
+          "endTime":"2018-1-1",
+          "content":[
+            "项目职责：前端开发",
+            "项目描述：项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          ]
+        },
+        {
+          "name":"基于xx的web平台",
+          "myRole":"",
+          "startTime":"2017-1-1",
+          "endTime":"2018-1-1",
+          "content":[
+            "项目职责：前端开发",
+            "项目描述：项目描述项目描述项目描述项目描述项目描述项目描述项目描述",
+            "链接: http://www.baidu.com"
+          ]
         }
       ],
       works:[
-        ""
+        {
+          "name":"xxx公司",
+          "myRole":"UI设计",
+          "startTime":"2017-1-1",
+          "endTime":"2018-1-1",
+          "content":[
+            "项目职责：前端开发",
+            "项目描述：项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          ]
+        },
+        {
+          "name":"xxx公司",
+          "myRole":"",
+          "startTime":"2017-1-1",
+          "endTime":"2018-1-1",
+          "content":[
+            "项目职责：前端开发",
+            "项目描述：项目描述项目描述项目描述项目描述项目描述项目描述项目描述"
+          ]
+        }
+      ],
+      skills:[
+        {
+          "title":"UI设计",
+          "description":[
+            "熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。"
+          ]
+        },
+        {
+          "title":"UI设计",
+          "description":[
+            "熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。"
+          ]
+        },
+        {
+          "title":"UI设计",
+          "description":[
+            "熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。熟练使用PS,美院毕业。"
+          ]
+        },
+        {
+          "title":"UI设计2",
+          "description":[
+            "熟练使用PS2",
+            "美院毕业2"
+          ]
+        }
       ]
     }
 

@@ -73,14 +73,69 @@
             <a href="javascript:;">x</a>
           </div>
         </div>
-        <div class="section-show" v-for="project in resume.projects">
-          <div class="list-item">
+        <div class="section-show">
+          <div class="list-item" v-for="project in resume.projects">
             <div class="title">
-              <p>{{project.name}}</p>
-              <p><span>{{project.startTime}}</span> — <span>{{project.endTime}}</span></p>
+              <p contenteditable="true">{{project.name}}</p>
+              <p contenteditable="true">{{project.myRole}}</p>
+              <p contenteditable="true"><span>{{project.startTime}}</span> — <span>{{project.endTime}}</span></p>
             </div>
             <ul class="content">
-                {{project.content}}
+              <li v-for="item in project.content">
+                {{item}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-section" data-name="works" v-if="resume.works instanceof Array">
+        <div class="title-bar">
+          <div>
+            <img src="../assets/user_2.png" alt="">
+            <h3>工作经历</h3>
+          </div>
+          <div class="action">
+            <a href="javascript:;">+</a>
+            <a href="javascript:;">x</a>
+          </div>
+        </div>
+        <div class="section-show">
+          <div class="list-item" v-for="work in resume.works">
+            <div class="title">
+              <p contenteditable="true">{{work.name}}</p>
+              <p contenteditable="true">{{work.myRole}}</p>
+              <p contenteditable="true"><span>{{work.startTime}}</span> — <span>{{work.endTime}}</span></p>
+            </div>
+            <ul class="content">
+              <li v-for="item in work.content">
+                {{item}}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-section" data-name="skills" v-if="resume.skills instanceof Array">
+        <div class="title-bar">
+          <div>
+            <img src="../assets/user_2.png" alt="">
+            <h3>个人技能</h3>
+          </div>
+          <div class="action">
+            <a href="javascript:;">+</a>
+            <a href="javascript:;">x</a>
+          </div>
+        </div>
+        <div class="section-show">
+          <div class="list-item" v-for="skill in resume.skills">
+            <div class="title">
+              <p contenteditable="true">{{skill.title}}</p>
+            </div>
+            <ul class="content">
+              <li v-for="item in skill.description">
+                {{item}}
+              </li>
             </ul>
           </div>
         </div>
@@ -266,7 +321,7 @@
         background: #fff;
 
         .main-section{
-          margin:50px 20px 20px 50px;
+          margin:50px 40px 20px 50px;
 
           .title-bar{
             padding-left: 6px;
@@ -307,6 +362,25 @@
             }
           }
 
+        }
+        .main-section[data-name="skills"]{
+          .title-bar{
+            border-bottom: none;
+          }
+          .section-show{
+            display: flex;
+            padding-top: 10px;
+            justify-content: space-between;
+            flex-wrap:wrap;
+
+            .list-item{
+              width: 48%;
+              border: 1px solid #ddd;
+              padding: 0 10px 10px 10px;
+              margin-bottom: 10px;
+              border-radius: 10px;
+            }
+          }
         }
       }
   }

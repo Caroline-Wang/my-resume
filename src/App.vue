@@ -45,7 +45,7 @@
        flex-shrink: 0;
        height: 70px;
        background: #fff;
-       box-shadow: 1px 1px 3px #ccc;
+       box-shadow: 1px 1px 3px 0 #ccc;
 
       #topbar{
         max-width: 1440px;
