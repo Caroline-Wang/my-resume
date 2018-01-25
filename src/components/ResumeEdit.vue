@@ -15,8 +15,16 @@
         <div class="title-bar">
           <h3>个人资料</h3>
           <div class="action">
-            <a href="javascript:;">+</a>
-            <a href="javascript:;">x</a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-add"></use>
+              </svg>
+            </a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-delete"></use>
+              </svg>
+            </a>
           </div>
           <div class="title-bar-style"></div>
         </div>
@@ -32,8 +40,16 @@
         <div class="title-bar">
           <h3>教育背景</h3>
           <div class="action">
-            <a href="javascript:;">+</a>
-            <a href="javascript:;">x</a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-add"></use>
+              </svg>
+            </a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-delete"></use>
+              </svg>
+            </a>
           </div>
           <div class="title-bar-style"></div>
         </div>
@@ -50,8 +66,16 @@
         <div class="title-bar">
           <h3>自我评价</h3>
           <div class="action">
-            <a href="javascript:;">+</a>
-            <a href="javascript:;">x</a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-add"></use>
+              </svg>
+            </a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-delete"></use>
+              </svg>
+            </a>
           </div>
           <div class="title-bar-style"></div>
         </div>
@@ -69,8 +93,16 @@
             <h3>项目经历</h3>
           </div>
           <div class="action">
-            <a href="javascript:;">+</a>
-            <a href="javascript:;">x</a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-add-o"></use>
+              </svg>
+            </a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-delete-o"></use>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="section-show">
@@ -96,8 +128,16 @@
             <h3>工作经历</h3>
           </div>
           <div class="action">
-            <a href="javascript:;">+</a>
-            <a href="javascript:;">x</a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-add-o"></use>
+              </svg>
+            </a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-delete-o"></use>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="section-show">
@@ -123,8 +163,16 @@
             <h3>个人技能</h3>
           </div>
           <div class="action">
-            <a href="javascript:;">+</a>
-            <a href="javascript:;">x</a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-add-o"></use>
+              </svg>
+            </a>
+            <a href="javascript:;">
+              <svg class="icon" aria-hidden="true">
+                <use xlink:href="#icon-delete-o"></use>
+              </svg>
+            </a>
           </div>
         </div>
         <div class="section-show">
@@ -243,12 +291,11 @@
               align-items: center;
               position: absolute;
               top:0;
-              left:calc(100% - 40px);
+              right:0;
               z-index: 1;
 
               >a{
-                 width: 20px;
-                 height: 20px;
+                 margin-left: 8px;
                }
             }
 
