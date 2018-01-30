@@ -22,6 +22,7 @@
   import Topbar from "./components/Topbar"
   import ResumeEdit from "./components/ResumeEdit"
 
+
   export default {
     name: 'App',
     components:{

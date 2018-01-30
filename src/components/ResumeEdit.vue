@@ -11,78 +11,59 @@
         <h2 contenteditable="true">{{resume.name}}</h2>
         <p contenteditable="true">{{resume.work}}</p>
       </div>
+
       <div class="base-section" data-name="personalInfo">
-        <div class="title-bar">
-          <h3>个人资料</h3>
-          <div class="action">
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-add"></use>
-              </svg>
-            </a>
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-delete"></use>
-              </svg>
-            </a>
-          </div>
-          <div class="title-bar-style"></div>
-        </div>
+        <Titlebar-baseInfos title="个人资料"></Titlebar-baseInfos>
         <div class="section-show" v-if="typeof resume.personalInfo==='object'">
-          <tr v-for="(value,key) in resume.personalInfo" class="list-item">
-            <td contenteditable="true">{{key}}</td><td contenteditable="true">{{value}}</td>
-            <!--<td><input type="text" :value="key"></td><td><input type="text" :value="value"></td>-->
-          </tr>
+          <ItemShow-tr :data="resume.personalInfo"></ItemShow-tr>
         </div>
       </div>
 
       <div class="base-section" data-name="education">
-        <div class="title-bar">
-          <h3>教育背景</h3>
-          <div class="action">
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-add"></use>
-              </svg>
-            </a>
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-delete"></use>
-              </svg>
-            </a>
-          </div>
-          <div class="title-bar-style"></div>
-        </div>
+        <Titlebar-baseInfos title="教育背景"></Titlebar-baseInfos>
         <div class="section-show" v-if="resume.education instanceof Array">
-          <ul>
-            <li v-for="(value) in resume.education" class="list-item" contenteditable="true">
-              {{value}}
-            </li>
-          </ul>
+          <ItemShow-list type="ol" :data="resume.education"></ItemShow-list>
         </div>
       </div>
 
       <div class="base-section" data-name="introduction">
-        <div class="title-bar">
-          <h3>自我评价</h3>
-          <div class="action">
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-add"></use>
-              </svg>
-            </a>
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-delete"></use>
-              </svg>
-            </a>
-          </div>
-          <div class="title-bar-style"></div>
-        </div>
-        <div class="section-show" v-if="typeof resume.introduction==='string'" contenteditable="true">
-          {{resume.introduction}}
+        <Titlebar-baseInfos title="个人介绍"></Titlebar-baseInfos>
+        <div class="section-show" v-if="typeof resume.introduction==='string'">
+          <EditableField :content="resume.introduction" @change="changeContent"></EditableField>
         </div>
       </div>
+
+        <!--<div class="title-bar">-->
+        <!--<div class="section-show" v-if="resume.education instanceof Array">-->
+          <!--<ul>-->
+            <!--<li v-for="(value) in resume.education" class="list-item" contenteditable="true">-->
+              <!--{{value}}-->
+            <!--</li>-->
+          <!--</ul>-->
+        <!--</div>-->
+
+
+      <!--<div class="base-section" data-name="introduction">-->
+        <!--<div class="title-bar">-->
+          <!--<h3>自我评价</h3>-->
+          <!--<div class="action">-->
+            <!--<a href="javascript:;">-->
+              <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-add"></use>-->
+              <!--</svg>-->
+            <!--</a>-->
+            <!--<a href="javascript:;">-->
+              <!--<svg class="icon" aria-hidden="true">-->
+                <!--<use xlink:href="#icon-delete"></use>-->
+              <!--</svg>-->
+            <!--</a>-->
+          <!--</div>-->
+          <!--<div class="title-bar-style"></div>-->
+        <!--</div>-->
+        <!--<div class="section-show" v-if="typeof resume.introduction==='string'" contenteditable="true">-->
+          <!--{{resume.introduction}}-->
+        <!--</div>-->
+      <!--</div>-->
 
     </section>
     <section class="main-infos">
@@ -195,8 +176,19 @@
 
 <script>
 
-  export default{
+  import EditableField from "./EditableField"
+  import Titlebar_style1 from "./Titlebar-style1"
+  import ItemShow_tr from "./ItemShow-tr"
+  import ItemShow_list from "./ItemShow-list"
+
+  export default {
     name:'ResumeEdit',
+    components: {
+        EditableField,
+        "Titlebar-baseInfos":Titlebar_style1,
+        "ItemShow-tr":ItemShow_tr,
+        "ItemShow-list":ItemShow_list
+    },
     data(){
       return {
 
@@ -206,6 +198,11 @@
       resume(){
           return this.$store.state.resume
       }
+    },
+    methods:{
+        changeContent(content){
+            console.log(content)
+        }
     }
   }
 
@@ -223,8 +220,6 @@
         min-width: 300px;
         background: #3C3A3D;
         color: #fff;
-        /*overflow-x: hidden;*/
-        /*overflow-y: auto;*/
 
         .avatar-wrapper{
           background: #fff;
@@ -266,102 +261,40 @@
             margin-bottom: 4px;
            }
         }
+
+
         .base-section{
           padding:0 20px 40px 50px;
 
           .title-bar{
-            height: 32px;
-            display:flex;
-            justify-content:space-between;
-            align-items: center;
-            background:#aaa;
-            padding-left:10px;
             margin-bottom: 10px;
-            position:relative;
-
-            h3:first-child{
-              font-weight: 500;
-              font-size: 18px;
-            }
-
-            .action{
-              height: 100%;
-              display: flex;
-              justify-content: flex-end;
-              align-items: center;
-              position: absolute;
-              top:0;
-              right:0;
-              z-index: 1;
-
-              >a{
-                 margin-left: 8px;
-               }
-            }
-
-            .title-bar-style::before{
-              content: '';
-              display: block;
-              width:40px;
-              height:32px;
-              background: #aaa;
-              position: absolute;
-              top:0;
-              left:100%;
-            }
-            .title-bar-style::after{
-              content: '';
-              display: block;
-              width:0px;
-              height:0px;
-              border-left:10px solid #777;
-              border-top:6px solid #777;
-              border-right:10px solid transparent;
-              border-bottom:6px solid transparent;
-              position: absolute;
-              top:100%;
-              left:calc(100% + 20px);
-            }
           }
-          .title-bar::before{
-            content: '';
-            display: block;
-            width:0;
-            height:0;
-            border-left:16px solid transparent;
-            border-top:16px solid transparent;
-            border-right:8px solid #aaa;
-            border-bottom:16px solid transparent;
-            position: absolute;
-            top:0;
-            left: -24px;
-          }
-
 
           .section-show{
             padding-left: 10px;
             font-size:14px;
-
-            .list-item{
-              /*padding:10px 0 0 0;*/
-            }
           }
         }
 
         div[data-name="personalInfo"]{
-          .list-item{
-            td{
-              padding:8px 20px 0 0;
-            }
+          .section-show{
+
+          }
+
+        }
+        div[data-name="introduction"]{
+          .section-show{
+            line-height: 2;
           }
         }
-        div[data-name="education"]{
-          ul{
-            list-style: circle;
-            padding-left: 20px;
-            line-height: 1.5;
-          }
-        }
+
+        /*div[data-name="education"]{*/
+          /*ul{*/
+            /*list-style: circle;*/
+            /*padding-left: 20px;*/
+            /*line-height: 1.5;*/
+          /*}*/
+        /*}*/
       }
      >.main-infos{
         width:65%;

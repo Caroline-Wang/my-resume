@@ -20,8 +20,6 @@ const store=new Vuex.Store({
         "2012-2016年，xxx大学",
         "本科，xxx专业",
         "2012-2016年，xxx大学",
-        "本科，xxx专业",
-        "2012-2016年，xxx大学",
         "本科，xxx专业"
       ],
       projects:[
