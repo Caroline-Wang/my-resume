@@ -7,168 +7,65 @@
           <img src="../assets/user.png" alt="头像">
         </div>
       </div>
+
+      <!--  标题  -->
       <div class="base-info">
-        <h2 contenteditable="true">{{resume.name}}</h2>
-        <p contenteditable="true">{{resume.work}}</p>
+        <h2 contenteditable="true" @focusout="changeText($event,'name')" v-html="resume.name"></h2>
+        <p contenteditable="true" @focusout="changeText($event,'work')" v-html="resume.work"></p>
       </div>
 
+      <!--  个人资料  -->
       <div class="base-section" data-name="personalInfo">
-        <Titlebar-baseInfos title="个人资料"></Titlebar-baseInfos>
-        <div class="section-show" v-if="typeof resume.personalInfo==='object'">
-          <ItemShow-tr :data="resume.personalInfo"></ItemShow-tr>
+        <Titlebar-baseInfos :title="resume.personalInfo.title" instance="personalInfo"></Titlebar-baseInfos>
+        <div class="section-show" v-if="resume.personalInfo.renderType==='table'">
+          <ItemShow-table :data="resume.personalInfo.content" instance="personalInfo"></ItemShow-table>
         </div>
       </div>
 
+      <!--  教育背景  -->
       <div class="base-section" data-name="education">
-        <Titlebar-baseInfos title="教育背景"></Titlebar-baseInfos>
-        <div class="section-show" v-if="resume.education instanceof Array">
-          <ItemShow-list type="ol" :data="resume.education"></ItemShow-list>
+        <Titlebar-baseInfos :title="resume.education.title" instance="education"></Titlebar-baseInfos>
+        <div class="section-show" v-if="resume.education.renderType==='list'">
+          <ItemShow-list type="ol" :data="resume.education.content" instance="education"></ItemShow-list>
         </div>
       </div>
 
+      <!--  自我评价  -->
       <div class="base-section" data-name="introduction">
-        <Titlebar-baseInfos title="个人介绍"></Titlebar-baseInfos>
-        <div class="section-show" v-if="typeof resume.introduction==='string'">
-          <EditableField :content="resume.introduction" @change="changeContent"></EditableField>
+        <Titlebar-baseInfos :title="resume.introduction.title" instance="introduction" operateAction="off"></Titlebar-baseInfos>
+        <div class="section-show" v-if="resume.introduction.renderType==='text'">
+          <p contenteditable="true" @focusout="changeText($event,'introduction')" v-html="resume.introduction.content"></p>
         </div>
       </div>
-
-        <!--<div class="title-bar">-->
-        <!--<div class="section-show" v-if="resume.education instanceof Array">-->
-          <!--<ul>-->
-            <!--<li v-for="(value) in resume.education" class="list-item" contenteditable="true">-->
-              <!--{{value}}-->
-            <!--</li>-->
-          <!--</ul>-->
-        <!--</div>-->
-
-
-      <!--<div class="base-section" data-name="introduction">-->
-        <!--<div class="title-bar">-->
-          <!--<h3>自我评价</h3>-->
-          <!--<div class="action">-->
-            <!--<a href="javascript:;">-->
-              <!--<svg class="icon" aria-hidden="true">-->
-                <!--<use xlink:href="#icon-add"></use>-->
-              <!--</svg>-->
-            <!--</a>-->
-            <!--<a href="javascript:;">-->
-              <!--<svg class="icon" aria-hidden="true">-->
-                <!--<use xlink:href="#icon-delete"></use>-->
-              <!--</svg>-->
-            <!--</a>-->
-          <!--</div>-->
-          <!--<div class="title-bar-style"></div>-->
-        <!--</div>-->
-        <!--<div class="section-show" v-if="typeof resume.introduction==='string'" contenteditable="true">-->
-          <!--{{resume.introduction}}-->
-        <!--</div>-->
-      <!--</div>-->
 
     </section>
+
     <section class="main-infos">
-      <div class="main-section" data-name="projects" v-if="resume.projects instanceof Array">
-        <div class="title-bar">
-          <div>
-            <img src="../assets/user_3.png" alt="">
-            <h3>项目经历</h3>
-          </div>
-          <div class="action">
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-add-o"></use>
-              </svg>
-            </a>
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-delete-o"></use>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="section-show">
-          <div class="list-item" v-for="project in resume.projects">
-            <div class="title">
-              <p contenteditable="true">{{project.name}}</p>
-              <p contenteditable="true">{{project.myRole}}</p>
-              <p contenteditable="true"><span>{{project.startTime}}</span> — <span>{{project.endTime}}</span></p>
-            </div>
-            <ul class="content">
-              <li v-for="item in project.content">
-                {{item}}
-              </li>
-            </ul>
-          </div>
+
+      <!--  项目经历  -->
+      <div class="main-section" data-name="projects">
+        <Titlebar-mainInfos :title="resume.projects.title" instance="projects"></Titlebar-mainInfos>
+        <div class="section-show" v-if="resume.projects.renderType==='multiList'">
+          <ItemShow-multiList type="ul" :data="resume.projects.content" instance="projects"></ItemShow-multiList>
         </div>
       </div>
 
-      <div class="main-section" data-name="works" v-if="resume.works instanceof Array">
-        <div class="title-bar">
-          <div>
-            <img src="../assets/user_2.png" alt="">
-            <h3>工作经历</h3>
-          </div>
-          <div class="action">
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-add-o"></use>
-              </svg>
-            </a>
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-delete-o"></use>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="section-show">
-          <div class="list-item" v-for="work in resume.works">
-            <div class="title">
-              <p contenteditable="true">{{work.name}}</p>
-              <p contenteditable="true">{{work.myRole}}</p>
-              <p contenteditable="true"><span>{{work.startTime}}</span> — <span>{{work.endTime}}</span></p>
-            </div>
-            <ul class="content">
-              <li v-for="item in work.content">
-                {{item}}
-              </li>
-            </ul>
-          </div>
+      <!--  工作经历  -->
+      <div class="main-section" data-name="works">
+        <Titlebar-mainInfos :title="resume.works.title" instance="works"></Titlebar-mainInfos>
+        <div class="section-show" v-if="resume.works.renderType==='multiList'">
+          <ItemShow-multiList type="ul" :data="resume.works.content" instance="works"></ItemShow-multiList>
         </div>
       </div>
 
-      <div class="main-section" data-name="skills" v-if="resume.skills instanceof Array">
-        <div class="title-bar">
-          <div>
-            <img src="../assets/user_2.png" alt="">
-            <h3>个人技能</h3>
-          </div>
-          <div class="action">
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-add-o"></use>
-              </svg>
-            </a>
-            <a href="javascript:;">
-              <svg class="icon" aria-hidden="true">
-                <use xlink:href="#icon-delete-o"></use>
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div class="section-show">
-          <div class="list-item" v-for="skill in resume.skills">
-            <div class="title">
-              <p contenteditable="true">{{skill.title}}</p>
-            </div>
-            <ul class="content">
-              <li v-for="item in skill.description">
-                {{item}}
-              </li>
-            </ul>
-          </div>
+      <!--  个人技能  -->
+      <div class="main-section" data-name="skills">
+        <Titlebar-mainInfos :title="resume.skills.title" instance="skills"></Titlebar-mainInfos>
+        <div class="section-show" v-if="resume.skills.renderType==='blockList'">
+          <ItemShow-blockList type="ul" :data="resume.skills.content" instance="skills"></ItemShow-blockList>
         </div>
       </div>
+
     </section>
   </div>
 
@@ -178,16 +75,22 @@
 
   import EditableField from "./EditableField"
   import Titlebar_style1 from "./Titlebar-style1"
-  import ItemShow_tr from "./ItemShow-tr"
+  import ItemShow_table from "./ItemShow-table"
   import ItemShow_list from "./ItemShow-list"
+  import Titlebar_style2 from "./Titlebar-style2"
+  import ItemShow_multiList from "./ItemShow-multiList"
+  import ItemShow_blockList from "./ItemShow-blockList"
 
   export default {
     name:'ResumeEdit',
     components: {
         EditableField,
         "Titlebar-baseInfos":Titlebar_style1,
-        "ItemShow-tr":ItemShow_tr,
-        "ItemShow-list":ItemShow_list
+        "ItemShow-table":ItemShow_table,
+        "ItemShow-list":ItemShow_list,
+        "Titlebar-mainInfos":Titlebar_style2,
+        "ItemShow-multiList":ItemShow_multiList,
+        "ItemShow-blockList":ItemShow_blockList
     },
     data(){
       return {
@@ -200,8 +103,8 @@
       }
     },
     methods:{
-        changeContent(content){
-            console.log(content)
+        changeText(e,instance){
+            this.$store.commit('editTextField',{name:instance,value:e.target.innerHTML})
         }
     }
   }
@@ -266,100 +169,36 @@
         .base-section{
           padding:0 20px 40px 50px;
 
-          .title-bar{
-            margin-bottom: 10px;
-          }
-
           .section-show{
             padding-left: 10px;
             font-size:14px;
           }
         }
 
-        div[data-name="personalInfo"]{
-          .section-show{
-
-          }
-
-        }
         div[data-name="introduction"]{
           .section-show{
             line-height: 2;
           }
         }
 
-        /*div[data-name="education"]{*/
-          /*ul{*/
-            /*list-style: circle;*/
-            /*padding-left: 20px;*/
-            /*line-height: 1.5;*/
-          /*}*/
-        /*}*/
       }
+
      >.main-infos{
         width:65%;
         background: #fff;
 
         .main-section{
-          margin:50px 40px 20px 50px;
+          margin:50px 30px 20px 50px;
 
-          .title-bar{
-            padding-left: 6px;
-            padding-bottom: 6px;
-            border-bottom:1px solid #ddd;
-            display:flex;
-            justify-content:space-between;
-            align-items: center;
-
-            img{
-               width:20px;
-               height: 20px;
-               vertical-align: bottom;
-               margin-right: 4px;
-             }
-             h3{
-                display: inline-block;
-                font-weight: 600;
-                font-size: 20px;
-              }
-          }
           .section-show{
             padding-left: 10px;
             margin-bottom:20px;
-
-            .list-item{
-              .title{
-                display: flex;
-                justify-content: space-between;
-                color: #666;
-                font-weight: bold;
-                margin: 10px 0;
-              }
-              .content{
-                font-size: 14px;
-                line-height: 1.5;
-              }
-            }
           }
 
         }
         .main-section[data-name="skills"]{
-          .title-bar{
+          .title-bar {
             border-bottom: none;
-          }
-          .section-show{
-            display: flex;
-            padding-top: 10px;
-            justify-content: space-between;
-            flex-wrap:wrap;
-
-            .list-item{
-              width: 48%;
-              border: 1px solid #ddd;
-              padding: 0 10px 10px 10px;
-              margin-bottom: 10px;
-              border-radius: 10px;
-            }
           }
         }
       }

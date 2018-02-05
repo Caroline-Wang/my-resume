@@ -1,9 +1,9 @@
 <template>
 
     <div class="title-bar">
-        <EditableField class="title" :content="currentTitle" @change="changeContent"></EditableField>
-        <div class="action">
-            <Operate_action name="add"></Operate_action>
+        <p class="title" contenteditable="true" @focusout="changeText" v-html="currentTitle"></p>
+        <div class="action" v-if="operateAction==='on'">
+            <Operate_action name="add" type="add" :operateTarget_name="instance"></Operate_action>
         </div>
         <div class="title-bar-style"></div>
     </div>
@@ -12,24 +12,32 @@
 
 <script>
 
-    import EditableField from "./EditableField"
     import Operate_action from "./Operate-action"
 
     export default{
         name:'Titlebar_style1',
         components:{
-            EditableField,
             "Operate_action":Operate_action
         },
-        props:['title'],
+        props:{
+            'title':[String],
+            'instance':[String],
+            'operateAction':{
+                type:String,
+                default:'on',
+                validator(value){
+                    return (value==='on' || value==='off')? value:'on'
+                }
+            }
+        },
         data(){
           return {
               currentTitle:this.title
           }
         },
         methods:{
-            changeContent(content){
-                console.log(content)
+            changeText(e){
+                this.$store.commit('editTitlebar',{name:this.instance,value:e.target.innerHTML})
             }
         }
     }

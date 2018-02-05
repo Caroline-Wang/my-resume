@@ -1,36 +1,39 @@
 <template>
 
     <div>
-        <ul v-if="currentType==='ol'">
-            <li v-for="value in currentArray" class="list-item">
-                <EditableField class="item-part" :content="value" @change="changeContent"></EditableField>
-                <div class="action">
-                    <Operate_action name="delete"></Operate_action>
-                </div>
-            </li>
-        </ul>
-        <ol v-else>
-            <li v-for="value in currentArray" class="list-item">
-                <EditableField class="item-part" :content="value" @change="changeContent"></EditableField>
-                <div class="action">
-                    <Operate_action name="delete"></Operate_action>
-                </div>
-            </li>
+        <ol v-if="currentType==='ol'">
+            <slot name="item" v-for="(value,index) in currentArray" :value="value" :index="index">
+                <li>
+                    <p class="item-part" contenteditable="true" @focusout="changeText(index,$event)" v-html="value"></p>
+                    <div class="action">
+                        <Operate-action name="delete" type="delete" :operateTarget_name="instance" :operateTarget_index="index"></Operate-action>
+                    </div>
+                </li>
+            </slot>
         </ol>
+        <ul v-else>
+            <slot name="item" v-for="(value,index) in currentArray" :value="value" :index="index">
+                <li>
+                    <p class="item-part" contenteditable="true" @focusout="changeText(index,$event)" v-html="value"></p>
+                    <div class="action">
+                        <Operate-action name="delete" type="delete" :operateTarget_name="instance" :operateTarget_index="index"></Operate-action>
+                    </div>
+                </li>
+            </slot>
+
+        </ul>
     </div>
 
 </template>
 
 <script>
 
-    import EditableField from "./EditableField"
     import Operate_action from "./Operate-action"
 
     export default{
         name:'ItemShow_list',
         components:{
-            EditableField,
-            "Operate_action":Operate_action
+            "Operate-action":Operate_action
         },
         props:{
             'type':{
@@ -42,7 +45,8 @@
             },
             'data':{
                 type:Array
-            }
+            },
+            'instance':[String]
         },
         data(){
             return {
@@ -51,8 +55,8 @@
             }
         },
         methods:{
-            changeContent(content){
-                console.log(content)
+            changeText(index,e){
+                this.$store.commit('editListField',{name:this.instance,index:index,value:e.target.innerHTML})
             }
         }
     }

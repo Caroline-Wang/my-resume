@@ -9,11 +9,6 @@
     export default{
         name:'EditableField',
         props:['content'],
-//    data(){
-//        return {
-//            currentText:this.content
-//        }
-//    },
         mounted:function () {
             this.$el.innerHTML=this.content
         },

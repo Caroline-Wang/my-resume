@@ -1,15 +1,15 @@
 <template>
 
     <table>
-        <tr v-for="(value,key) in currentObj" class="list-item">
+        <tr v-for="(value,index) in currentArray" class="list-item">
             <td class="item-part">
-                <EditableField :content="key" @change="changeContent"></EditableField>
+                <p contenteditable="true" @focusout="changeText(index,$event,'key')" v-html="value.key"></p>
             </td>
             <td class="item-part">
-                <EditableField :content="value" @change="changeContent"></EditableField>
+                <p contenteditable="true" @focusout="changeText(index,$event,'value')" v-html="value.value"></p>
             </td>
             <td class="action">
-                <Operate_action name="delete" show="false"></Operate_action>
+                <Operate-action name="delete" type="delete" :operateTarget_name="instance" :operateTarget_index="index"></Operate-action>
             </td>
         </tr>
     </table>
@@ -22,24 +22,23 @@
     import Operate_action from "./Operate-action"
 
     export default{
-        name:'ItemShow_tr',
+        name:'ItemShow_table',
         components:{
             EditableField,
-            "Operate_action":Operate_action
+            "Operate-action":Operate_action
         },
         props:{
-            'data':{
-                type:Object
-            }
+            'data':[Array],
+            'instance':[String]
         },
         data(){
             return {
-                currentObj:this.data
+                currentArray:this.data
             }
         },
         methods:{
-            changeContent(content){
-                console.log(content)
+            changeText(index,e,key){
+                this.$store.commit('editObjField',{name:this.instance,index:index,key:key,value:e.target.innerHTML})
             }
         }
     }
