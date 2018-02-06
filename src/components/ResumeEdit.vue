@@ -2,10 +2,10 @@
 
   <div id="resumeEdit" class="resumeEdit-wrapper">
     <section class="base-infos">
+
+      <!--  个人头像  -->
       <div class="avatar-wrapper">
-        <div class="avatar">
-          <img src="../assets/user.png" alt="头像">
-        </div>
+          <ItemShow-imageChoose class="avatar" id="userPicture" imageSrc="avatar.png"></ItemShow-imageChoose>
       </div>
 
       <!--  标题  -->
@@ -80,6 +80,7 @@
   import Titlebar_style2 from "./Titlebar-style2"
   import ItemShow_multiList from "./ItemShow-multiList"
   import ItemShow_blockList from "./ItemShow-blockList"
+  import ItemShow_imageChoose from "./ItemShow-imageChoose"
 
   export default {
     name:'ResumeEdit',
@@ -90,7 +91,8 @@
         "ItemShow-list":ItemShow_list,
         "Titlebar-mainInfos":Titlebar_style2,
         "ItemShow-multiList":ItemShow_multiList,
-        "ItemShow-blockList":ItemShow_blockList
+        "ItemShow-blockList":ItemShow_blockList,
+        "ItemShow-imageChoose":ItemShow_imageChoose
     },
     data(){
       return {
@@ -110,6 +112,20 @@
   }
 
 </script>
+
+<style lang="scss">
+  .avatar{
+    img{
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      position: absolute;
+      top: 70px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+</style>
 
 <style scoped lang="scss">
   .resumeEdit-wrapper{
@@ -132,15 +148,6 @@
           .avatar{
             width: 100px;
             height: 150px;
-            img{
-              width: 160px;
-              height: 160px;
-              border-radius: 50%;
-              position: absolute;
-              top: 70px;
-              left: 50%;
-              transform: translateX(-50%);
-            }
           }
         }
         .avatar-wrapper::before{
@@ -155,6 +162,8 @@
           left: 50%;
           transform: translateX(-50%);
         }
+
+
         .base-info{
           padding-top: 90px;
           margin-bottom: 50px;
@@ -164,7 +173,6 @@
             margin-bottom: 4px;
            }
         }
-
 
         .base-section{
           padding:0 20px 40px 50px;

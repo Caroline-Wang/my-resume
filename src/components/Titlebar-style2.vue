@@ -2,7 +2,7 @@
 
     <div class="title-bar">
         <div>
-            <img src="../assets/user_3.png" alt="">
+            <ItemShow-imageChoose class="titlebar_icon" :id="'icon_'+instance" imageSrc="user_3.png"></ItemShow-imageChoose>
             <h3 class="title" contenteditable="true" @focusout="changeText" v-html="currentTitle"></h3>
         </div>
         <div class="action">
@@ -15,11 +15,13 @@
 <script>
 
     import Operate_action from "./Operate-action"
+    import ItemShow_imageChoose from "./ItemShow-imageChoose"
 
     export default{
         name:'Titlebar_style2',
         components:{
-            "Operate_action":Operate_action
+            "Operate_action":Operate_action,
+            "ItemShow-imageChoose":ItemShow_imageChoose
         },
         props:{
             'title':[String],
@@ -46,6 +48,16 @@
 
 </script>
 
+<style lang="scss">
+    .titlebar_icon{
+        img{
+            width:20px;
+            height: 20px;
+            vertical-align: middle;
+        }
+    }
+</style>
+
 <style scoped lang="scss">
     .title-bar{
         padding-left: 6px;
@@ -57,11 +69,9 @@
         font-weight: 600;
         font-size: 20px;
 
-        img{
-            width:20px;
-            height: 20px;
-            vertical-align: bottom;
+        .titlebar_icon{
             margin-right: 4px;
+            display: inline-block;
         }
         .title{
             display: inline-block;
