@@ -28,7 +28,10 @@
     components:{
       Topbar,ResumeEdit
     },
-    store
+    store,
+    created(){
+        this.$store.commit('getFromLocalStorage')
+    }
   }
 
 </script>

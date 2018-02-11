@@ -90,49 +90,64 @@ const store=new Vuex.Store({
 
   },
   mutations:{
+    getFromLocalStorage(state){
+        let localState=localStorage.getItem('$state')
+        if(localState){
+            Object.assign(state,JSON.parse(localState))
+        }
+    },
+    saveToLocalStorage(state){
+        localStorage.setItem('$state',JSON.stringify(state))
+    },
     addItem(state,{name}){
       switch(state['resume'][name].renderType){
           case "list":  //说明添加数组项
-              state['resume'][name]['content'].push('编辑我...');
-              break;
+              state['resume'][name]['content'].push('编辑我...')
+              break
           case "table":  //说明添加对象属性项
               state['resume'][name]['content'].push({
                   key:"编辑我...",
                   value:"编辑我..."
-              });
-              break;
+              })
+              break
           case "multiList":  //说明添加数组项
               state['resume'][name]['content'].push({
                   "titleLeft":"编辑我...",
                   "titleMiddle":"编辑我...",
                   "titleRight":"编辑我...",
                   "description":"编辑我..."
-              });
-              break;
+              })
+              break
           case "blockList":  //说明添加对象属性项
               state['resume'][name]['content'].push({
                   title:"编辑我...",
                   description:"编辑我..."
-              });
-              break;
+              })
+              break
       }
+      this.commit('saveToLocalStorage')
     },
     deleteItem(state,{name,index}){
       if(state['resume'][name]['content'] instanceof Array){  //说明删除数组项
           state['resume'][name]['content'].splice(index,1)
       }
+      this.commit('saveToLocalStorage')
     },
     editTitlebar(state,{name,value}){
       Vue.set(state['resume'][name],'title',value)
+      this.commit('saveToLocalStorage')
     },
     editTextField(state,{name,value}){
       (name==='name' || name==='work')? state['resume'][name]=value : state['resume'][name]['content']=value
+      this.commit('saveToLocalStorage')
     },
     editListField(state,{name,index,value}){
       state['resume'][name]['content'].splice(index,1,value)
+      this.commit('saveToLocalStorage')
     },
     editObjField(state,{name,index,key,value}){
       Vue.set(state['resume'][name]['content'][index],key,value)
+      this.commit('saveToLocalStorage')
     }
   }
 })

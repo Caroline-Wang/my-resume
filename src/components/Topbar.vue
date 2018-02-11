@@ -40,9 +40,26 @@
             aElement.click();
         },
         savePdf(dataUrl, canvas){
-            var doc = new jsPDF('', 'pt', 'a4')
-            doc.addImage(dataUrl, 'png', -10, 0, 595.28, 595.28 / canvas.width * canvas.height)
-            doc.save('resume.pdf')
+//            var doc = new jsPDF('', 'pt', 'a4')
+//            doc.addImage(dataUrl, 'png', 0, 0, 595, 595 / canvas.width * canvas.height)
+//            doc.save('resume.pdf')
+
+            var imgWidth = 210;
+            var pageHeight = 295;
+            var imgHeight = canvas.height * imgWidth / canvas.width;
+            var heightLeft = imgHeight;
+            var doc = new jsPDF('p', 'mm','a4',true);
+            var position = 0;
+            //最后一个参数压缩率参数有(NONE, FAST, MEDIUM , SLOW)
+            doc.addImage(dataUrl, 'PNG', 0, position, imgWidth, imgHeight,'','FAST');
+            heightLeft -= pageHeight;
+            while (heightLeft >= 0) {
+                position = heightLeft - imgHeight;
+                doc.addPage();
+                doc.addImage(dataUrl, 'PNG', 0, position, imgWidth, imgHeight,'','FAST');
+                heightLeft -= pageHeight;
+            }
+            doc.save('resume.pdf');
         }
     }
   }
