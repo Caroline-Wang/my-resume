@@ -51,7 +51,10 @@
         width:100%;
         tr{
             td.item-part{
-                padding:4px 20px 0 0;
+                padding-top:4px;
+            }
+            td.item-part:first-child{
+                padding-right:6px;
             }
 
             td.action{

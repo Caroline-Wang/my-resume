@@ -30,6 +30,14 @@
         </div>
       </div>
 
+      <!--  教育背景  -->
+      <div class="base-section" data-name="education">
+        <Titlebar-baseInfos :title="resume.education.title" instance="education"></Titlebar-baseInfos>
+        <div class="section-show" v-if="resume.education.renderType==='list'">
+          <ItemShow-list type="ol" :data="resume.education.content" instance="education"></ItemShow-list>
+        </div>
+      </div>
+
       <!--  自我评价  -->
       <div class="base-section" data-name="introduction">
         <Titlebar-baseInfos :title="resume.introduction.title" instance="introduction" operateAction="off"></Titlebar-baseInfos>

@@ -90,7 +90,7 @@
         .content{
             font-size: 14px;
             line-height: 1.5;
-            margin-right: 10px;
+            margin: 8px 10px 0 0;
         }
     }
 </style>
