@@ -3,9 +3,9 @@
         <ItemShow-list :type="type" :data="data" :instance="instance" class="list-show">
             <li slot="item" slot-scope="props" >
                 <div class="title">
-                    <p contenteditable="true" @focusout="changeText(props.index,$event,'title')" v-html="props.value.title"></p>
+                    <p class="edit-field" contenteditable="true" @focusout="changeText(props.index,$event,'title')" v-html="props.value.title"></p>
                 </div>
-                <p class="content" contenteditable="true" @focusout="changeText(props.index,$event,'description')" v-html="props.value.description"></p>
+                <p class="edit-field content" contenteditable="true" @focusout="changeText(props.index,$event,'description')" v-html="props.value.description"></p>
                 <div class="action">
                     <Operate-action name="delete-o" type="delete" :operateTarget_name="instance" :operateTarget_index="props.index"></Operate-action>
                 </div>
@@ -63,6 +63,9 @@
 </style>
 
 <style scoped lang="scss">
+    .edit-field{
+        white-space: pre-line;
+    }
     li{
         width: 48%;
         border: 1px solid #ddd;

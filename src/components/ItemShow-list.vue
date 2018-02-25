@@ -4,7 +4,7 @@
         <ol v-if="currentType==='ol'">
             <slot name="item" v-for="(value,index) in currentArray" :value="value" :index="index">
                 <li>
-                    <p class="item-part" contenteditable="true" @focusout="changeText(index,$event)" v-html="value"></p>
+                    <p class="edit-field item-part" contenteditable="true" @focusout="changeText(index,$event)" v-html="value"></p>
                     <div class="action">
                         <Operate-action name="delete" type="delete" :operateTarget_name="instance" :operateTarget_index="index"></Operate-action>
                     </div>
@@ -14,7 +14,7 @@
         <ul v-else>
             <slot name="item" v-for="(value,index) in currentArray" :value="value" :index="index">
                 <li>
-                    <p class="item-part" contenteditable="true" @focusout="changeText(index,$event)" v-html="value"></p>
+                    <p class="edit-field item-part" contenteditable="true" @focusout="changeText(index,$event)" v-html="value"></p>
                     <div class="action">
                         <Operate-action name="delete" type="delete" :operateTarget_name="instance" :operateTarget_index="index"></Operate-action>
                     </div>
@@ -64,6 +64,9 @@
 </script>
 
 <style scoped lang="scss">
+    .edit-field{
+        white-space: pre-line;
+    }
     ol{
         list-style: circle;
         padding-left: 16px;

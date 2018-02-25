@@ -3,14 +3,14 @@
     <ItemShow-list :type="type" :data="data" :instance="instance">
         <li slot="item" slot-scope="props" >
             <div class="title">
-                <p contenteditable="true" @focusout="changeText(props.index,$event,'titleLeft')" v-html="props.value.titleLeft"></p>
-                <p contenteditable="true" @focusout="changeText(props.index,$event,'titleMiddle')" v-html="props.value.titleMiddle"></p>
-                <p contenteditable="true" @focusout="changeText(props.index,$event,'titleRight')" v-html="props.value.titleRight"></p>
+                <p class="edit-field" contenteditable="true" @focusout="changeText(props.index,$event,'titleLeft')" v-html="props.value.titleLeft"></p>
+                <p class="edit-field" contenteditable="true" @focusout="changeText(props.index,$event,'titleMiddle')" v-html="props.value.titleMiddle"></p>
+                <p class="edit-field" contenteditable="true" @focusout="changeText(props.index,$event,'titleRight')" v-html="props.value.titleRight"></p>
                 <div class="action">
                     <Operate-action name="delete-o" type="delete" :operateTarget_name="instance" :operateTarget_index="props.index"></Operate-action>
                 </div>
             </div>
-            <div class="content" contenteditable="true" @focusout="changeText(props.index,$event,'description')" v-html="props.value.description"></div>
+            <div class="edit-field content" contenteditable="true" @focusout="changeText(props.index,$event,'description')" v-html="props.value.description"></div>
         </li>
     </ItemShow-list>
 
@@ -56,6 +56,9 @@
 </script>
 
 <style scoped lang="scss">
+    .edit-field{
+        white-space: pre-line;
+    }
     li{
         margin-bottom:20px;
 

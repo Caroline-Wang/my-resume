@@ -3,7 +3,7 @@
     <div>
         <input type="file" :id="id" @change="chooseFile($event)" accept="image/*" style="display: none" >
         <label :for="id">
-            <img :src="'/static/img/'+imageSrc" alt="图片" />
+            <img :src="src" alt="图片" />
         </label>
     </div>
 
@@ -16,6 +16,11 @@
         props:{
             "id":[String],
             "imageSrc":[String]
+        },
+        data(){
+            return {
+                src:require(`../assets/img/${this.imageSrc}`)
+            }
         },
         methods:{
             chooseFile(e){

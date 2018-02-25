@@ -3,10 +3,10 @@
     <table>
         <tr v-for="(value,index) in currentArray" class="list-item">
             <td class="item-part">
-                <p contenteditable="true" @focusout="changeText(index,$event,'key')" v-html="value.key"></p>
+                <p class="edit-field" contenteditable="true" @focusout="changeText(index,$event,'key')" v-html="value.key"></p>
             </td>
             <td class="item-part">
-                <p contenteditable="true" @focusout="changeText(index,$event,'value')" v-html="value.value"></p>
+                <p class="edit-field" contenteditable="true" @focusout="changeText(index,$event,'value')" v-html="value.value"></p>
             </td>
             <td class="action">
                 <Operate-action name="delete" type="delete" :operateTarget_name="instance" :operateTarget_index="index"></Operate-action>
@@ -46,7 +46,9 @@
 </script>
 
 <style scoped lang="scss">
-
+    .edit-field{
+        white-space: pre-line;
+    }
     table{
         width:100%;
         tr{

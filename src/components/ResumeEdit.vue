@@ -10,8 +10,8 @@
 
       <!--  标题  -->
       <div class="base-info">
-        <h2 contenteditable="true" @focusout="changeText($event,'name')" v-html="resume.name"></h2>
-        <p contenteditable="true" @focusout="changeText($event,'work')" v-html="resume.work"></p>
+        <h2 class="edit-field" contenteditable="true" @focusout="changeText($event,'name')" v-html="resume.name"></h2>
+        <p class="edit-field" contenteditable="true" @focusout="changeText($event,'work')" v-html="resume.work"></p>
       </div>
 
       <!--  个人资料  -->
@@ -34,7 +34,7 @@
       <div class="base-section" data-name="introduction">
         <Titlebar-baseInfos :title="resume.introduction.title" instance="introduction" operateAction="off"></Titlebar-baseInfos>
         <div class="section-show" v-if="resume.introduction.renderType==='text'">
-          <p contenteditable="true" @focusout="changeText($event,'introduction')" v-html="resume.introduction.content"></p>
+          <p class="edit-field" contenteditable="true" @focusout="changeText($event,'introduction')" v-html="resume.introduction.content"></p>
         </div>
       </div>
 
@@ -128,6 +128,9 @@
 </style>
 
 <style scoped lang="scss">
+  .edit-field{
+    white-space: pre-line;
+  }
   .resumeEdit-wrapper{
     width:100%;
     background: #fff;
