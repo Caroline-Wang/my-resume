@@ -5,7 +5,7 @@
 
       <!--  个人头像  -->
       <div class="avatar-wrapper">
-          <ItemShow-imageChoose class="avatar" id="userPicture" imageSrc="avatar.png"></ItemShow-imageChoose>
+          <ItemShow-imageChoose class="avatar" id="userPicture" imageSrc="avatar_default.png"></ItemShow-imageChoose>
       </div>
 
       <!--  标题  -->
