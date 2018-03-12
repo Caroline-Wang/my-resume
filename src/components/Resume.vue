@@ -11,16 +11,43 @@
 </template>
 
 <script>
+    import AV from 'leancloud-storage'
     import Topbar from "./Topbar"
     import ResumeEdit from "./ResumeEdit"
 
     export default {
-        name: 'App',
+        name: 'Resume',
         components:{
             Topbar,ResumeEdit
         },
+        beforeCreate(){
+            var currentUser = AV.User.current();
+            if (currentUser) {
+                console.log('检测到是登录状态')
+            }
+            else {
+                console.log('未登录，进入登录页面')
+                this.$router.go(-1)
+            }
+        },
         created(){
-//            this.$store.commit('getFromLocalStorage')
+            this.$loading({
+                text:'正在加载您的简历...'
+            })
+            let query = new AV.Query('Resume')
+            query.find().then((list) => {
+                this.$loading().close()
+                if(list && list instanceof Array && list.length===1){
+                    //把数据加载到store
+                    let currentState=JSON.parse(list[0]["attributes"]["content"])
+                    if(!currentState.resumeId) currentState.resumeId=list[0].id
+                    this.$store.commit('initState',{currentState:currentState})
+                }
+            },  (error)=> {
+                this.$loading().close()
+                console.log(error);
+                this.$message.error(error);
+            });
         }
     }
 </script>

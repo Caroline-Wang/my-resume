@@ -31,9 +31,9 @@
             'data':[Array],
             'instance':[String]
         },
-        data(){
-            return {
-                currentArray:this.data
+        computed:{
+            currentArray(){
+                return this.data
             }
         },
         methods:{

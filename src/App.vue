@@ -16,13 +16,7 @@
 
   export default {
       name: 'App',
-      components:{
-
-      },
-      store,
-      created(){
-//          this.$store.commit('getFromLocalStorage')
-      }
+      store
   }
 
 </script>

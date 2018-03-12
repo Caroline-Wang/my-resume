@@ -32,43 +32,45 @@
     },
     methods: {
         save(){
+            this.$loading({
+                text:'正在保存，请稍候...'
+            })
             if(this.resumeId===''){
                 let ResumeObject = AV.Object.extend('Resume');
                 let resume = new ResumeObject();
-                resume.set('content', JSON.stringify(this.$store.state));
+                resume.set('content', JSON.stringify(this.$store.state.resume))
 
-                let acl = new AV.ACL();
-                acl.setReadAccess(AV.User.current(), true);
-                acl.setWriteAccess(AV.User.current(), true);
-
-                resume.setACL(acl);
                 resume.save().then((savedResume)=>{
                     console.log('新增成功')
+                    this.$loading().close()
                     this.$store.commit('editTextField',{name:'resumeId',value:savedResume["id"]})
                     this.$message({
                         message: '新增成功！',
                         type: 'success'
                     });
-                }).catch(function (error) {
-                    console.log(error);
-                });
+                }).catch((error)=>{
+                    console.log(error)
+                    this.$loading().close()
+                    this.$message.error(error);
+                })
             }else{
                 console.log('更新');
-                let _this=this
                 // 第一个参数是 className，第二个参数是 objectId
                 let resume = AV.Object.createWithoutData('Resume', this.resumeId);
                 // 修改属性
-                resume.set('content', JSON.stringify(this.$store.state));
+                resume.set('content', JSON.stringify(this.$store.state.resume));
                 // 保存到云端
-                resume.save().then(function (data) {
+                resume.save().then((data)=>{
                     console.log('更新成功')
-                    _this.$message({
+                    this.$loading().close()
+                    this.$message({
                         message: '更新成功！',
                         type: 'success'
-                    });
-                }).catch(function (error) {
+                    })
+                }).catch((error)=> {
                     console.log(error)
-                    _this.$message.error('更新失败！');
+                    this.$loading().close()
+                    this.$message.error(error);
                 })
             }
         },

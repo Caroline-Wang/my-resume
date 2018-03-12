@@ -11,13 +11,13 @@ const store=new Vuex.Store({
       work:'求职岗位',
       personalInfo:{
         "renderType":"table",
-        "title":"请填写项",
+        "title":"个人信息",
         "content":[
             {
-                key:"性别", value:"男"
+                key:"性别", value:"xxx"
             },
             {
-                key:"年龄", value:"24岁"
+                key:"年龄", value:"xxx"
             },
             {
                 key:"电话", value:"xxx"
@@ -94,14 +94,9 @@ const store=new Vuex.Store({
 
   },
   mutations:{
-    getFromLocalStorage(state){
-        let localState=localStorage.getItem('$state')
-        if(localState){
-            Object.assign(state,JSON.parse(localState))
-        }
-    },
-    saveToLocalStorage(state){
-        localStorage.setItem('$state',JSON.stringify(state))
+    initState(state,{currentState}){
+        console.log(currentState)
+        state.resume=Object.assign({},state.resume,currentState)
     },
     addItem(state,{name}){
       switch(state['resume'][name].renderType){
@@ -152,6 +147,15 @@ const store=new Vuex.Store({
     editObjField(state,{name,index,key,value}){
       Vue.set(state['resume'][name]['content'][index],key,value)
       // this.commit('saveToLocalStorage')
+    },
+    getFromLocalStorage(state){
+        let localState=localStorage.getItem('$state')
+        if(localState){
+            Object.assign(state,JSON.parse(localState))
+        }
+    },
+    saveToLocalStorage(state){
+        localStorage.setItem('$state',JSON.stringify(state))
     }
   }
 })

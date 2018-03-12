@@ -48,22 +48,21 @@
                 this.clearErrorTip()
                 if(this.formData.name && this.formData.password){
                     //用户名和密码合法，进行提交
-                    var _this=this
+                    this.$loading({
+                        text:'正在登录，请稍候...'
+                    })
                     AV.User.logIn(this.formData.name, this.formData.password).then((loginedUser) => {
-                        console.log('登陆成功')
-                        console.log(loginedUser)
+                        this.$loading().close()
                         //登陆成功，进入页面
                         this.$message({
                             message: '登录成功！',
-                            type: 'success',
-                            onClose:function () {
-                                _this.$router.push({path:'main'})
-                            }
+                            type: 'success'
                         });
                         this.$router.push({path:'main'})
-                    }, function (error) {
-                        _this.errorTip.show=true
-                        _this.errorTip.description=error.rawMessage
+                    }, (error)=> {
+                        this.$loading().close()
+                        this.errorTip.show=true
+                        this.errorTip.description=error.rawMessage
                     });
                 }else{
                     this.errorTip.show=true
@@ -73,33 +72,32 @@
             signUp(){
                 this.clearErrorTip()
                 if(this.formData.name && this.formData.password){
-                    var _this=this
                     //用户名和密码合法，进行提交
-                    console.log('提交注册！');
-                    var user = new AV.User();
-                    user.setUsername(this.formData.name);
-                    user.setPassword(this.formData.password);
+                    console.log('提交注册！')
+                    this.$loading({
+                        text:'正在注册，请稍候...'
+                    })
+                    var user = new AV.User()
+                    user.setUsername(this.formData.name)
+                    user.setPassword(this.formData.password)
                     user.signUp().then((loginedUser) => {
-                        console.log(loginedUser);
+                        console.log(loginedUser)
                         //注册成功，进入页面
+                        this.$loading().close()
                         this.$message({
                             message: '注册成功！',
-                            type: 'success',
-                            onClose:function () {
-                                _this.$router.push({path:'main'})
-                            }
+                            type: 'success'
                         });
+                        this.$router.push({path:'main'})
                     }, function (error) {
-                        _this.errorTip.show=true
-                        _this.errorTip.description=error.rawMessage
+                        this.errorTip.show=true
+                        this.errorTip.description=error.rawMessage
                     });
                 }else{
+                    this.$loading().close()
                     this.errorTip.show=true
                     this.errorTip.description='用户名或密码不能为空！'
                 }
-            },
-            toMain(){
-
             }
         }
     }

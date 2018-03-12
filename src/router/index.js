@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import Resume from '@/components/Resume'
+import HelloWorld from '@/components/HelloWorld'
 
 Vue.use(Router)
 
